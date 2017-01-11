@@ -1,0 +1,16 @@
+<p>Stuff TODO</p>
+<%= Setting.plugin_stuff_to_do_plugin['mail_header'] %>
+<ul>
+  <% @stuff_to_dos.each do |std| %>
+      <li><%= "#{std.stuff}" %></li>
+  <% end %>
+
+</ul>
+<%= url_for :controller => 'stuff_to_do', :action => 'index', :user_id => @user.id, :only_path => false %>
+<%= Setting.plugin_stuff_to_do_plugin['mail_footer'] %>
+<% if @comment.present? %>
+    <br/>
+    ---------------------------
+    <br/>
+    <%= @comment %>
+<% end %>

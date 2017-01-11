@@ -1,0 +1,40 @@
+<fieldset>
+  <legend><%= l(:stuff_to_do_label_project_manager_emails) %></legend>
+  <p>
+    <%= l(:stuff_to_do_text_settings) %>
+  </p>
+
+  <p>
+    <label><%= l(:stuff_to_do_label_threshold) %></label><%= text_field_tag 'settings[threshold]', @settings['threshold'] %>
+  </p>
+
+  <p>
+    <label><%= l(:stuff_to_do_label_email_to) %></label><%= text_field_tag 'settings[email_to]', @settings['email_to'] %>
+  </p>
+
+
+  <p>
+    <label>Mail header</label>
+    <%= text_area_tag 'settings[mail_header]',  @settings['mail_header']%>
+  </p>
+
+  <p>
+    <label>Mail footer</label>
+    <%= text_area_tag 'settings[mail_footer]',  @settings['mail_footer']%>
+  </p>
+
+</fieldset>
+
+<p>
+  <label><%= l(:stuff_to_do_use_as_stuff_to_do) %></label>
+  <%= select_tag('settings[use_as_stuff_to_do]',
+                 options_for_select(StuffToDo::USE.to_a, @settings['use_as_stuff_to_do'])) %>
+</p>
+
+<p>
+  <label><%= l(:stuff_to_do_statuses_available) %></label>
+  <%= select_tag('settings[statuses_for_stuff_to_do]',
+                 options_for_select(IssueStatus.where(:is_closed => false).sorted.collect{ |s| [s.name, s.id] }.unshift(['All Open Statuses', 'all']), @settings['statuses_for_stuff_to_do']),
+                 :multiple => true) %>
+</p>
+
